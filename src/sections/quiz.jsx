@@ -17,7 +17,9 @@ export default function Quiz(props) {
       try {
         // Check if quizName is not empty before making the API call
         if (quizName) {
-          const response = await axios.get(`/questions/${quizName}.json`);
+          const lowerCaseQuizName = quizName.toLowerCase();
+
+          const response = await axios.get(`/questions/${lowerCaseQuizName}.json`);
           console.log("Response data:", response.data);  // Add this line for debugging
           setQuizData(response.data);
         }
