@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Quiz(props) {
@@ -8,19 +8,19 @@ export default function Quiz(props) {
   const [selectedOption, setSelectedOption] = useState("");
   const [score, setScore] = useState(0);
   const [questionID, setQuestionID] = useState(1);
+  const [timer, setTimer] = useState(20); // 20 seconds timer
 
   useEffect(() => {
     setClosed(false);
     setQuestionID(1);
+    setTimer(20);
 
     const fetchQuizData = async () => {
       try {
-        // Check if quizName is not empty before making the API call
         if (quizName) {
           const lowerCaseQuizName = quizName.toLowerCase();
-
           const response = await axios.get(`/questions/${lowerCaseQuizName}.json`);
-          console.log("Response data:", response.data);  // Add this line for debugging
+          console.log("Response data:", response.data);
           setQuizData(response.data);
         }
       } catch (error) {
@@ -32,9 +32,35 @@ export default function Quiz(props) {
       console.error("Unhandled promise rejection:", error);
     });
 
-    // Initialize score when the component mounts
     setScore(0);
   }, [quizName]);
+
+  useEffect(() => {
+    let timerInterval;
+
+    if (questionID <= quizData.length) {
+      timerInterval = setInterval(() => {
+        setTimer((prevTimer) => {
+          if (prevTimer === 1) {
+            clearInterval(timerInterval);
+            handleTimeout();
+            return 20; // Reset the timer for the next question
+          } else {
+            return prevTimer - 1;
+          }
+        });
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(timerInterval);
+    };
+  }, [questionID, quizData]);
+
+  const handleTimeout = () => {
+    setQuestionID((prevID) => prevID + 1);
+    setSelectedOption(""); // Reset selected option
+  };
 
   const closeCurrentQuiz = () => {
     setClosed(true);
@@ -47,19 +73,12 @@ export default function Quiz(props) {
 
   const submitOption = () => {
     if (quizData[questionID - 1]?.answer === selectedOption) {
-      setScore((prevScore) => {
-        const newScore = prevScore + 1;
-        console.log("Correct!, score is now", newScore);
-        return newScore;
-      });
-    } else {
-      console.log("Wrong, answer was", quizData[questionID - 1]?.answer);
+      setScore((prevScore) => prevScore + 1);
     }
-    setQuestionID((prevID) => {
-      const newID = prevID + 1;
-      return newID;
-    })
 
+    setQuestionID((prevID) => prevID + 1);
+    setSelectedOption("");
+    setTimer(20); // Reset timer for the next question
   };
 
   let questionNumber = quizData[questionID - 1]?.id;
@@ -77,7 +96,7 @@ export default function Quiz(props) {
           </div>
           <div className="space-y-2">
             {questionNumber ? (
-              <h2 className="text-xl font-bold tracking-tighter sm:text-2xl md:text-3xl lg:text-3xl/none">
+              <h2 className="text-lg font-semibold tracking-tighter sm:text-xl md:text-xl lg:text-2xl/none">
                 Question {questionNumber}
               </h2>
             ) : (
@@ -85,7 +104,7 @@ export default function Quiz(props) {
                 <h2 className="text-2xl font-semibold text-center">Score: {score}/{quizData.length}</h2>
               </div>
             )}
-            <p className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+            <p className="text-gray-100 text-xl md:text-2xl/relaxed lg:text-base/relaxed xl:text-2xl/relaxed dark:text-gray-400">
               {question}
             </p>
           </div>
@@ -112,14 +131,36 @@ export default function Quiz(props) {
             />
           </div>
           {questionID <= quizData.length ? (
-            <p className="text-lg text-gray-500 dark:text-gray-400">
-              Question <b className="text-gray-400 ">{questionID} </b> of {quizData.length}
-            </p>
+            <>
+              <p className="text-lg text-gray-500 dark:text-gray-400">
+                Timer: {timer} seconds
+              </p>
+              <p className="text-lg text-gray-500 dark:text-gray-400">
+                Question <b className="text-gray-400 ">{questionID} </b> of {quizData.length}
+              </p>
+            </>
+
 
           ) : (
-            <p className="text-lg text-gray-500 dark:text-gray-400">
-              Quiz Complete
-            </p>
+            <div>
+              <p className="text-lg text-gray-500 dark:text-gray-400">
+                Quiz Complete
+              </p>
+              <div>
+                <p className="text-lg text-gray-500 dark:text-gray-400">
+                  Answers
+                </p>
+                <ol>
+                  {quizData.map((question, index) => (
+                    <li key={index}>
+                      Q{question.id} - {question.answer}
+                    </li>
+                  ))}
+                </ol>
+
+              </div>
+
+            </div>
           )}
           {questionID <= quizData.length && (
             <p className="text-lg text-gray-500 dark:text-gray-400">
@@ -144,20 +185,15 @@ export default function Quiz(props) {
           }
 
           <div className="flex space-x-40 justify-between">
-            <div className="p-2 rounded-xl border border-red-400 cursor-pointer">
-              <p>Go Back</p>
-            </div>
-            <div className="p-2 rounded-xl border border-green-400 cursor-pointer">
-              <p>Forward</p>
-            </div>
-          </div>
-          {questionID <= quizData.length && (
-            < a className="p-2 rounded-xl border border-red-400 cursor-pointer" onClick={closeCurrentQuiz}>
-              Quit
-            </a>
 
-          )
-          }
+            {questionID <= quizData.length && (
+              < a className="p-2 rounded-xl border border-red-400 cursor-pointer" onClick={closeCurrentQuiz}>
+                Quit
+              </a>
+
+            )
+            }
+          </div>
 
         </div>
       </div>
