@@ -18,9 +18,8 @@ export default function Quiz(props) {
         // Check if quizName is not empty before making the API call
         if (quizName) {
           const response = await axios.get(`/questions/${quizName}.json`);
+          console.log("Response data:", response.data);  // Add this line for debugging
           setQuizData(response.data);
-        } else {
-          console.error("quizName is empty");
         }
       } catch (error) {
         console.error("Error fetching quiz data:", error);
