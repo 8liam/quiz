@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Quiz(props) {
   const { quizName, closeQuiz } = props;
@@ -11,16 +12,16 @@ export default function Quiz(props) {
   useEffect(() => {
     setClosed(false);
     setQuestionID(1);
+
     const fetchQuizData = async () => {
       try {
-        const response = await fetch(`/questions/${quizName}.json`, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-        });
-        const data = await response.json();
-        setQuizData(data);
+        // Check if quizName is not empty before making the API call
+        if (quizName) {
+          const response = await axios.get(`/questions/${quizName}.json`);
+          setQuizData(response.data);
+        } else {
+          console.error("quizName is empty");
+        }
       } catch (error) {
         console.error("Error fetching quiz data:", error);
       }
