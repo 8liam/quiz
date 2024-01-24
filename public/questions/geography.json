@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "question": "What is the capital city of Australia?",
+        "answer": "Canberra",
+        "options": [
+            "Sydney",
+            "Melbourne",
+            "Canberra",
+            "Brisbane"
+        ]
+    },
+    {
+        "id": 2,
+        "question": "What is the capital city of Germany?",
+        "answer": "Berlin",
+        "options": [
+            "Berlin",
+            "Munich",
+            "Hamburg",
+            "Cologne"
+        ]
+    },
+    {
+        "id": 3,
+        "question": "Which river is the longest in the world?",
+        "answer": "Nile",
+        "options": [
+            "Amazon",
+            "Nile",
+            "Yangtze",
+            "Mississippi"
+        ]
+    },
+    {
+        "id": 4,
+        "question": "In which continent is the Sahara Desert located?",
+        "answer": "Africa",
+        "options": [
+            "Asia",
+            "Europe",
+            "North America",
+            "Africa"
+        ]
+    },
+    {
+        "id": 5,
+        "question": "Which country is known as the 'Land of the Rising Sun'?",
+        "answer": "Japan",
+        "options": [
+            "China",
+            "South Korea",
+            "Japan",
+            "Vietnam"
+        ]
+    },
+    {
+        "id": 6,
+        "question": "What is the capital city of Canada?",
+        "answer": "Ottawa",
+        "options": [
+            "Toronto",
+            "Vancouver",
+            "Ottawa",
+            "Montreal"
+        ]
+    },
+    {
+        "id": 7,
+        "question": "Which mountain range is located in the United States?",
+        "answer": "Rocky Mountains",
+        "options": [
+            "Andes",
+            "Himalayas",
+            "Alps",
+            "Rocky Mountains"
+        ]
+    },
+    {
+        "id": 8,
+        "question": "What is the largest ocean on Earth?",
+        "answer": "Pacific Ocean",
+        "options": [
+            "Atlantic Ocean",
+            "Indian Ocean",
+            "Arctic Ocean",
+            "Pacific Ocean"
+        ]
+    },
+    {
+        "id": 9,
+        "question": "Which country is known as the 'Land of a Thousand Lakes'?",
+        "answer": "Finland",
+        "options": [
+            "Sweden",
+            "Norway",
+            "Denmark",
+            "Finland"
+        ]
+    },
+    {
+        "id": 10,
+        "question": "What is the capital city of New Zealand?",
+        "answer": "Wellington",
+        "options": [
+            "Auckland",
+            "Christchurch",
+            "Wellington",
+            "Hamilton"
+        ]
+    }
+]

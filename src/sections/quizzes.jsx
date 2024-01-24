@@ -6,6 +6,8 @@ export default function Quizzes() {
   const [quizTitle, setQuizTitle] = useState("");
   const [quizDescription, setQuizDescription] = useState("");
   const [quizStarted, setQuizStarted] = useState("");
+  const [closed, setClosed] = useState(false);
+
   // List of Quizzes. Used to map to cards.
 
   const example = [
@@ -26,8 +28,8 @@ export default function Quizzes() {
 
   const quizzes = [
     {
-      "title": "General Knowledge",
-      "description": "A quiz covering a broad range of topics to test your general awareness and knowledge."
+      "title": "Geography",
+      "description": "Test your knowledge of the world's continents, countries, cities, and physical features with this geography quiz."
     },
     {
       "title": "Mathematics",
@@ -36,10 +38,6 @@ export default function Quizzes() {
     {
       "title": "History",
       "description": "Explore historical events, figures, and civilizations in this quiz to test your knowledge of the past."
-    },
-    {
-      "title": "Geography",
-      "description": "Test your knowledge of the world's continents, countries, cities, and physical features with this geography quiz."
     },
     {
       "title": "Upload",
@@ -51,11 +49,24 @@ export default function Quizzes() {
     for (let i = 0; i < quizzes.length; i++) {
       if (quizzes[i].title === title) {
         setQuizTitle(quizzes[i].title);
-        setQuizDescription(quizzes[i].description)
+        setQuizDescription(quizzes[i].description);
+        setClosed(false);
+
+        // Only set quizStarted to title if it hasn't started yet
+        if (quizStarted === null) {
+          setQuizStarted(null); // Clear the previous selection
+        }
       }
     }
   };
 
+  const closeQuiz = () => {
+    setQuizStarted(null);
+  };
+
+  const beginQuiz = () => {
+    setQuizStarted(quizTitle);
+  };
 
   return (
     <>
@@ -69,7 +80,7 @@ export default function Quizzes() {
             {quizzes.map((quiz) => (
               <a
                 key={quiz.title}
-                className="flex flex-col p-2 items-center justify-center border-2 border-solid border-accent bg-primary text-white rounded-xl cursor-pointer hover:bg-accent hover:text-black duration-300"
+                className="flex flex-col p-2 items-center justify-center border-2 border-solid border-accent bg-primary text-white rounded-xl cursor-pointer hover:bg-accent hover:text-black duration-300 focus:bg-accent focus:text-black"
                 onClick={() => showQuizInfo(quiz.title)}
                 href="#"
               >
@@ -82,42 +93,42 @@ export default function Quizzes() {
 
           </div>
           {quizTitle && quizTitle !== "Upload" && (
-            <div className="w-full text-center" >
-              <h1 className="font-semibold text-2xl">
-                {quizTitle}</h1>
+            <div className="w-full text-center">
+              <h1 className="font-semibold text-2xl">{quizTitle}</h1>
               <p>{quizDescription}</p>
               <div className="flex mt-4">
-                <a className="p-2 border-accent bg-primary border rounded-xl mx-auto cursor-pointer hover:bg-accent hover:text-black duration-300"
-                  onClick={() => setQuizStarted(quizTitle)}
-                >Begin Quiz</a>
-
+                <a
+                  className="p-2 border-accent bg-primary border rounded-xl mx-auto cursor-pointer hover:bg-accent hover:text-black duration-300"
+                  onClick={beginQuiz} // Use beginQuiz function
+                >
+                  Begin Quiz
+                </a>
               </div>
             </div>
-
           )}
           {quizTitle === "Upload" && (
             <div className="w-full text-center">
-              <h1 className="font-semibold text-2xl">
-                {quizTitle}</h1>
+              <h1 className="font-semibold text-2xl">{quizTitle}</h1>
               <p>{quizDescription}</p>
-              <pre className="bg-black overflow-auto">
+              <pre className="bg-black overflow-auto text-left">
                 <code className="text-white bg-black">
                   {JSON.stringify(example, null, 2)}
-
                 </code>
               </pre>
               <div className="flex mt-4">
-                <a className="p-2 border-accent bg-primary border rounded-xl mx-auto cursor-pointer hover:bg-accent hover:text-black duration-300"
-                >Upload Questions and Begin Quiz</a>
-
+                <a
+                  className="p-2 border-accent bg-primary border rounded-xl mx-auto cursor-pointer hover:bg-accent hover:text-black duration-300"
+                >
+                  Upload Questions and Begin Quiz
+                </a>
               </div>
             </div>
-          )}
 
+          )}
         </div>
       </div>
-      {quizStarted && (
-        <Quiz quizName={quizStarted} />
+      {quizStarted !== null && (
+        <Quiz quizName={quizStarted} closeQuiz={closeQuiz} />
       )}
     </>
   );
