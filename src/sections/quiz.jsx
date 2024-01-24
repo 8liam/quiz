@@ -13,7 +13,7 @@ export default function Quiz(props) {
     setQuestionID(1);
     const fetchQuizData = async () => {
       try {
-        const response = await fetch(`./questions/${quizName}.json`, {
+        const response = await fetch(`/questions/${quizName}.json`, {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
