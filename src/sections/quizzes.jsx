@@ -56,9 +56,6 @@ export default function Quizzes() {
     }
   };
 
-  const startQuiz = (title) => {
-    setQuizStarted({ title });
-  };
 
   return (
     <>

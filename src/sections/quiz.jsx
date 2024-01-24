@@ -1,6 +1,37 @@
+import { useEffect, useState } from "react";
+
 export default function Quiz(props) {
   const { quizName } = props;
   console.log(quizName);
+
+  const [quizData, setQuizData] = useState([]);
+
+  useEffect(() => {
+    const fetchQuizData = async () => {
+      try {
+        const response = await fetch(`./mathematics.json`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+        });
+        const data = await response.json();
+        setQuizData(data);
+      } catch (error) {
+        console.error("Error fetching quiz data:", error);
+      }
+    };
+
+    fetchQuizData();
+  }, []);
+
+
+
+  console.log(quizData);
+
+  // Question Number
+  const questionNumber = quizData[0].id;
+
   return (
     <section className="bg-primary text-white max-w-[100vw] xl:px-[20%] sm:max-xl:px-[15%] max-sm:px-[2.5%] py-8">
       <div className="container px-4 md:px-6">
@@ -12,7 +43,7 @@ export default function Quiz(props) {
           </div>
           <div className="space-y-2">
             <h2 className="text-xl font-bold tracking-tighter sm:text-2xl md:text-3xl lg:text-3xl/none">
-              Question 1
+              Question {questionNumber}
             </h2>
             <p className=" text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
               What is the capital of France?
