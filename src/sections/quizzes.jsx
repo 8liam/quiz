@@ -36,10 +36,6 @@ export default function Quizzes() {
       "description": "A quiz focused on mathematical concepts, including arithmetic, algebra, geometry, and more."
     },
     {
-      "title": "History",
-      "description": "Explore historical events, figures, and civilizations in this quiz to test your knowledge of the past."
-    },
-    {
       "title": "Upload",
       "description": "Create your own questions in a .json file format and test yourself. Follow the example below for json structure."
     }
