@@ -1,112 +1,57 @@
 [
     {
         "id": 1,
-        "question": "Who painted the mona lisa?",
-        "answer": "10",
+        "question": "Who painted the Mona Lisa?",
+        "answer": "Leonardo Da Vinci",
         "options": [
-            "4",
-            "9",
-            "10",
-            "0"
+            "Michelangelo",
+            "Raphael",
+            "Leonardo Da Vinci",
+            "Vincent van Gogh"
         ]
     },
     {
         "id": 2,
-        "question": "What is 5-5",
-        "answer": "0",
+        "question": "What is the capital of France?",
+        "answer": "Paris",
         "options": [
-            "4",
-            "9",
-            "0",
-            "15"
+            "London",
+            "Berlin",
+            "Madrid",
+            "Paris"
         ]
     },
     {
         "id": 3,
-        "question": "What is 3 multiplied by 7?",
-        "answer": "21",
+        "question": "What is the largest planet in our solar system?",
+        "answer": "Jupiter",
         "options": [
-            "10",
-            "14",
-            "21",
-            "24"
+            "Earth",
+            "Mars",
+            "Saturn",
+            "Jupiter"
         ]
     },
     {
         "id": 4,
-        "question": "What is 8 divided by 2?",
-        "answer": "4",
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "answer": "William Shakespeare",
         "options": [
-            "2",
-            "3",
-            "4",
-            "6"
+            "Jane Austen",
+            "Charles Dickens",
+            "William Shakespeare",
+            "Homer"
         ]
     },
     {
         "id": 5,
-        "question": "What is the square root of 25?",
-        "answer": "5",
+        "question": "What is the capital of Japan?",
+        "answer": "Tokyo",
         "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-        ]
-    },
-    {
-        "id": 6,
-        "question": "What is 12 plus 8?",
-        "answer": "20",
-        "options": [
-            "15",
-            "18",
-            "20",
-            "22"
-        ]
-    },
-    {
-        "id": 7,
-        "question": "What is 9 minus 3?",
-        "answer": "6",
-        "options": [
-            "3",
-            "6",
-            "9",
-            "12"
-        ]
-    },
-    {
-        "id": 8,
-        "question": "What is 5 times 4?",
-        "answer": "20",
-        "options": [
-            "12",
-            "15",
-            "20",
-            "25"
-        ]
-    },
-    {
-        "id": 9,
-        "question": "What is 16 divided by 4?",
-        "answer": "4",
-        "options": [
-            "2",
-            "4",
-            "6",
-            "8"
-        ]
-    },
-    {
-        "id": 10,
-        "question": "What is 7 plus 3?",
-        "answer": "10",
-        "options": [
-            "7",
-            "8",
-            "10",
-            "12"
+            "Beijing",
+            "Seoul",
+            "Bangkok",
+            "Tokyo"
         ]
     }
 ]
