@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Quiz(props) {
-  const { quizName, closeQuiz } = props;
+  const { quizName, closeQuiz, uploadedQuiz } = props;
   const [quizData, setQuizData] = useState([]);
   const [closed, setClosed] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -17,11 +17,13 @@ export default function Quiz(props) {
 
     const fetchQuizData = async () => {
       try {
-        if (quizName) {
+        if (quizName !== "Custom Quiz") {
           const lowerCaseQuizName = quizName.toLowerCase();
           const response = await axios.get(`/questions/${lowerCaseQuizName}.json`);
-          console.log("Response data:", response.data);
           setQuizData(response.data);
+        }
+        else if (quizName === "Custom Quiz") {
+          setQuizData(uploadedQuiz);
         }
       } catch (error) {
         console.error("Error fetching quiz data:", error);

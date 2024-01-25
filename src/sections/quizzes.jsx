@@ -7,6 +7,7 @@ export default function Quizzes() {
   const [quizDescription, setQuizDescription] = useState("");
   const [quizStarted, setQuizStarted] = useState("");
   const [closed, setClosed] = useState(false);
+  const [uploadedQuiz, setUploadedQuiz] = useState(null);
 
   // List of Quizzes. Used to map to cards.
 
@@ -23,7 +24,6 @@ export default function Quizzes() {
     }
   ]
 
-  // console.log(example[0].options[0]) // 5
 
 
   const quizzes = [
@@ -40,6 +40,26 @@ export default function Quizzes() {
       "description": "Create your own questions in a .json file format and test yourself. Follow the example below for json structure."
     }
   ];
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const quizData = JSON.parse(e.target.result);
+          setUploadedQuiz(quizData);
+
+        } catch (error) {
+          console.error("Error parsing uploaded quiz data:", error);
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  };
 
   const showQuizInfo = (title) => {
     for (let i = 0; i < quizzes.length; i++) {
@@ -63,6 +83,8 @@ export default function Quizzes() {
   const beginQuiz = () => {
     setQuizStarted(quizTitle);
   };
+
+
 
   return (
     <>
@@ -106,16 +128,25 @@ export default function Quizzes() {
             <div className="w-full text-center">
               <h1 className="font-semibold text-2xl">{quizTitle}</h1>
               <p>{quizDescription}</p>
-              <pre className="bg-black overflow-auto text-left">
-                <code className="text-white bg-black">
-                  {JSON.stringify(example, null, 2)}
-                </code>
-              </pre>
+              <input
+                type="file"
+                accept=".json"
+                onChange={handleFileChange}
+                className="mt-4"
+              />
+              {!uploadedQuiz && (
+                <pre className="bg-black overflow-auto text-left mt-4">
+                  <code className="text-white bg-black">
+                    {JSON.stringify(example, null, 2)}
+                  </code>
+                </pre>
+              )}
               <div className="flex mt-4">
                 <a
                   className="p-2 border-accent bg-primary border rounded-xl mx-auto cursor-pointer hover:bg-accent hover:text-black duration-300"
+                  onClick={() => setQuizStarted("uploaded")} // Set a custom name for the uploaded quiz
                 >
-                  Upload Questions and Begin Quiz
+                  Begin Quiz
                 </a>
               </div>
             </div>
@@ -123,9 +154,16 @@ export default function Quizzes() {
           )}
         </div>
       </div>
+      {quizStarted === "uploaded" && uploadedQuiz !== null ? (
+        <Quiz quizName="Custom Quiz " closeQuiz={closeQuiz} uploadedQuiz={uploadedQuiz} />
+      ) : null
+      }
       {quizStarted !== null && (
         <Quiz quizName={quizStarted} closeQuiz={closeQuiz} />
       )}
+
+
+
     </>
-  );
+  )
 }
