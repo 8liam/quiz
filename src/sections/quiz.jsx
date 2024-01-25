@@ -17,16 +17,23 @@ export default function Quiz(props) {
 
     const fetchQuizData = async () => {
       try {
-        if (quizName !== "Custom Quiz") {
+        let data;
+
+        if (quizName !== "uploaded") {
           const lowerCaseQuizName = quizName.toLowerCase();
           const response = await axios.get(`/questions/${lowerCaseQuizName}.json`);
-          setQuizData(response.data);
+          data = response.data;
+        } else {
+          data = uploadedQuiz;
         }
-        else if (quizName === "Custom Quiz") {
-          setQuizData(uploadedQuiz);
+
+        if (Array.isArray(data)) {
+          setQuizData(data);
+        } else {
+          console.error("Invalid quiz data format");
         }
       } catch (error) {
-        console.error("Error fetching quiz data:", error);
+        console.error("Error fetching or processing quiz data:", error);
       }
     };
 
@@ -35,7 +42,7 @@ export default function Quiz(props) {
     });
 
     setScore(0);
-  }, [quizName]);
+  }, [quizName, uploadedQuiz]);
 
   useEffect(() => {
     let timerInterval;

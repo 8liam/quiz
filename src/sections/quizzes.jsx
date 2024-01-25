@@ -51,13 +51,14 @@ export default function Quizzes() {
         try {
           const quizData = JSON.parse(e.target.result);
           setUploadedQuiz(quizData);
-
+          console.log(quizData);
         } catch (error) {
           console.error("Error parsing uploaded quiz data:", error);
         }
       };
 
       reader.readAsText(file);
+
     }
   };
 
@@ -146,7 +147,7 @@ export default function Quizzes() {
                   className="p-2 border-accent bg-primary border rounded-xl mx-auto cursor-pointer hover:bg-accent hover:text-black duration-300"
                   onClick={() => setQuizStarted("uploaded")} // Set a custom name for the uploaded quiz
                 >
-                  Begin Quiz
+                  Start Custom Quiz
                 </a>
               </div>
             </div>
@@ -155,7 +156,7 @@ export default function Quizzes() {
         </div>
       </div>
       {quizStarted === "uploaded" && uploadedQuiz !== null ? (
-        <Quiz quizName="Custom Quiz " closeQuiz={closeQuiz} uploadedQuiz={uploadedQuiz} />
+        <Quiz quizName="uploaded" closeQuiz={closeQuiz} uploadedQuiz={uploadedQuiz} />
       ) : null
       }
       {quizStarted !== null && (
