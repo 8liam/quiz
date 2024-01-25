@@ -100,7 +100,7 @@ export default function Quiz(props) {
         <div className="flex flex-col items-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl/none">
-              {quizName}
+              {quizName == "uploaded" ? "Custom Quiz" : quizName}
             </h2>
           </div>
           <div className="space-y-2">
@@ -117,7 +117,7 @@ export default function Quiz(props) {
               {question}
             </p>
           </div>
-          <div className="grid grid-cols-4 gap-8 min-[400px]:flex-row text-xl">
+          <div className="grid grid-cols-2 gap-8 min-[400px]:flex-row text-xl">
             {Array.isArray(options)
               ? options.map((option, index) => (
                 <button
@@ -187,7 +187,7 @@ export default function Quiz(props) {
             </a>
 
           ) : (
-            <a className="p-2 rounded-xl border border-red-400 cursor-pointer" onClick={closeCurrentQuiz}>
+            <a className="p-2 rounded-xl border border-red-400 cursor-pointer hover:bg-red-400 hover:text-white duration-300" onClick={closeCurrentQuiz}>
               Quit
             </a>
           )
@@ -196,7 +196,7 @@ export default function Quiz(props) {
           <div className="flex space-x-40 justify-between">
 
             {questionID <= quizData.length && (
-              < a className="p-2 rounded-xl border border-red-400 cursor-pointer" onClick={closeCurrentQuiz}>
+              < a className="p-2 rounded-xl border border-red-400 cursor-pointer  hover:bg-red-400 hover:text-white duration-300" onClick={closeCurrentQuiz}>
                 Quit
               </a>
 
