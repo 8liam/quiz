@@ -20,6 +20,7 @@ export default function Quizzes() {
         "5",
         "6",
         "1",
+        "4"
       ]
     }
   ]
@@ -133,7 +134,7 @@ export default function Quizzes() {
                 type="file"
                 accept=".json"
                 onChange={handleFileChange}
-                className="mt-4"
+                className="mt-4 p-2 bg-primary rounded-xl border border-accent"
               />
               {!uploadedQuiz && (
                 <pre className="bg-black overflow-auto text-left mt-4">
