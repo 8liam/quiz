@@ -180,8 +180,9 @@ export default function Quiz(props) {
           }
           {questionID <= quizData.length ? (
             <a
-              className="mt-4 bg-primary p-2 rounded-xl text-white border border-accent font-bold cursor-pointer hover:bg-accent hover:text-black duration-300"
-              onClick={submitOption}
+              className={`mt-4 bg-primary p-2 rounded-xl text-white border border-accent font-bold cursor-pointer hover:bg-accent hover:text-black duration-300 ${selectedOption === "" ? "opacity-50 cursor-not-allowed" : ""}`}
+              onClick={() => selectedOption !== "" && submitOption()}
+              style={{ pointerEvents: selectedOption === "" ? "none" : "auto" }}
             >
               Submit Answer
             </a>
