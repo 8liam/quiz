@@ -1,6 +1,7 @@
 
 # Interactive Quiz Application
 
+![Home Page of EasyQuiz](https://i.imgur.com/zlNQK46.png) 
 ## Project Requirements
 - [x] User Interface: Design an engaging and intuitive user interface for the quiz.
 - [x] Question Navigation: Allow users to move between questions, view their progress, and submit answers.
