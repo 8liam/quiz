@@ -1,6 +1,5 @@
 
-# For AltitudeCode
-Interactive Quiz Application
+# Interactive Quiz Application
 =======
 ## Project Requirements
 - [x] User Interface: Design an engaging and intuitive user interface for the quiz.
@@ -16,3 +15,4 @@ Interactive Quiz Application
 
 Deployed to [Vercel](https://quiz-8liam.vercel.app/)
 
+Built and Maintained by Liam Grant. Thanks to the developers of the libraries and frameworks used in this project.
